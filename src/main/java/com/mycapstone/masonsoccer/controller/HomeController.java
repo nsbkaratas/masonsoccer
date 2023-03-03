@@ -1,6 +1,6 @@
 package com.mycapstone.masonsoccer.controller;
 
-import com.mycapstone.masonsoccer.dao.CoachRepositoryI;
+import com.mycapstone.masonsoccer.dao.CoachRepoI;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 public class HomeController {
     @Autowired
-    private CoachRepositoryI coachRepoI;
+    private CoachRepoI coachRepoI;
 
     @GetMapping(value = {"/", "/home"})
     public String home(){
@@ -25,6 +25,11 @@ public class HomeController {
     public String register(Model model){
 
         return "register";
+    }
+
+    @GetMapping("/index")
+    public String index(){
+        return "index";
     }
 
     @GetMapping("/login")

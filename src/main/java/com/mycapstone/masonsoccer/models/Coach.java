@@ -1,59 +1,99 @@
 package com.mycapstone.masonsoccer.models;
 
+/**
+ * @author nesibe karatas
+ */
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+import java.util.*;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Objects;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-/**
- * @author nesibe karatas
- */
 @Entity
-@Table(name = "coaches")
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Slf4j
 public class Coach {
-    @NonNull
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+
+
     @Id
-    Integer coach_id;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "coach_id", nullable = false)
+    private Integer id;
+    @Size(max = 50)
     @NonNull
-    String first_name;
+    @Column(name = "first_name", nullable = false, length = 50)
+    private String firstName;
 
+    @Size(max = 50)
     @NonNull
-    String last_name;
+    @Column(name = "last_name", nullable = false, length = 50)
+    private String lastName;
 
+    @Size(max = 100)
     @NonNull
-    String email;
+    @Column(name = "email", nullable = false, length = 100)
+    private String email;
 
+    @Size(max = 20)
     @NonNull
-    String phone_number;
+    @Column(name = "phone_number", nullable = false, length = 20)
+    private String phoneNumber;
 
+    @Size(max = 50)
     @NonNull
-    String user_name;
+    @Column(name = "username", nullable = false, length = 50)
+    private String username;
 
+    @Size(max = 50)
     @NonNull
-    String password;
+    @Column(name = "password", nullable = false, length = 50)
+    private String password;
 
+    @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    Set<Team> team = new LinkedHashSet<>() ;
+
+    public void addTeam(Team t){
+        team.add(t);
+        t.setCoach(this);
+    }
+    public void removeTeam(Team t){
+        team.remove(t);
+        t.setCoach(null);
+    }
+    public Coach(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String phoneNumber, @NonNull String username, @NonNull String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.username = username;
+        this.password = password;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Coach coach = (Coach) o;
-        return coach_id.equals(coach.coach_id) && first_name.equals(coach.first_name) && last_name.equals(coach.last_name) && email.equals(coach.email) && phone_number.equals(coach.phone_number) && user_name.equals(coach.user_name) && password.equals(coach.password);
+        return Objects.equals(id, coach.id) && firstName.equals(coach.firstName) && lastName.equals(coach.lastName) && email.equals(coach.email) && phoneNumber.equals(coach.phoneNumber) && username.equals(coach.username) && password.equals(coach.password) && Objects.equals(team, coach.team);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(coach_id, first_name, last_name, email, phone_number, user_name, password);
+        return Objects.hash(id, firstName, lastName, email, phoneNumber, username, password, team);
     }
 }
