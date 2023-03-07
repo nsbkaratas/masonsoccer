@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+  <!-- Head-->
+  <div th:replace="fragments/head :: head" />
+  <body>
+    <header>
+      <!-- Responsive navbar-->
+      <div th:replace="fragments/nav :: nav" />
+    </header>
+    <main id="main-content">
+      <div class="bg-light">
+        <h1>Teams List</h1>
+        <br /><br />
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped" id="doctor">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">AgeGroup</th>
+                <th scope="col">Coach</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <a class="btn btn-info">Update</a>
+                  <a class="btn btn-danger ml-2">Delete</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <a class="btn btn-primary">Add Team</a>
+          <br /><br />
+        </div>
+      </div>
+    </main>
+    <div class="container text-light">
+      <!-- Footer-->
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

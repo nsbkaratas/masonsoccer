@@ -3,6 +3,7 @@ package com.mycapstone.masonsoccer.models;
 /**
  * @author nesibe karatas
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -20,6 +21,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
+@AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -47,8 +50,13 @@ public class Team {
     @Column(name = "gender", nullable = false, length = 10)
     private String gender;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
-    @JoinColumn (name = "coach_id")
+//    @ToString.Exclude
+//    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
+//    @JoinColumn (name = "coach_id")
+////    @JsonIgnore
+//    Coach coach;
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, targetEntity = Coach.class)
+    @JoinColumn(name = "coach_id", referencedColumnName = "id")
     Coach coach;
 
     @ToString.Exclude

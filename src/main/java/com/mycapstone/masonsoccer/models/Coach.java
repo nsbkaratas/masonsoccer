@@ -21,6 +21,7 @@ import java.util.Set;
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -28,11 +29,9 @@ import java.util.Set;
 @Slf4j
 public class Coach {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "coach_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
     @Size(max = 50)
     @NonNull
@@ -64,17 +63,20 @@ public class Coach {
     @Column(name = "password", nullable = false, length = 50)
     private String password;
 
-    @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
-    Set<Team> team = new LinkedHashSet<>() ;
+//    @ToString.Exclude
+//    @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+//    Set<Team> team = new LinkedHashSet<>() ;
+    @OneToOne(mappedBy = "coach")
+    Team team;
 
-    public void addTeam(Team t){
-        team.add(t);
-        t.setCoach(this);
-    }
-    public void removeTeam(Team t){
-        team.remove(t);
-        t.setCoach(null);
-    }
+//    public void addTeam(Team t){
+//        team.add(t);
+//        t.setCoach(this);
+//    }
+//    public void removeTeam(Team t){
+//        team.remove(t);
+//        t.setCoach(null);
+//    }
     public Coach(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String phoneNumber, @NonNull String username, @NonNull String password) {
         this.firstName = firstName;
         this.lastName = lastName;
