@@ -30,13 +30,13 @@
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <div class="col">
-                    <div class="card shadow-sm">
+                    <div class="card shadow-sm" th:each="team: ${teams}">
                         <img class="card-img-top" src="./images/kickers.jpg" alt="">
                         <div class="card-body">
                             <p class="card-text" >
                                 <ul>
                                     <li>Team name:<span th:text="${team.name}"></span> </li>
-                                    <li>Team name: <span th:text="${training.date}"></span></li>
+                                    <li>Team name: <span th:text="${team.training.}"></span></li>
                                     <li>Team name: <span th:text="${training.fieldName}"></span></li>
                                     <li>Team name:<span th:text="${training.duration}"></span> </li>
                                     <li>Team name:<span th:text="${training.startTime}"></span> </li>
@@ -76,6 +76,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
 </main>
 <div class="container text-light">

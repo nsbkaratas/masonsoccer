@@ -23,7 +23,6 @@ import java.util.Set;
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -37,17 +36,17 @@ public class Team {
 
     @Size(max = 50)
     @NonNull
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(nullable = false, length = 50)
     private String name;
 
     @Size(max = 50)
     @NonNull
-    @Column(name = "age_group", nullable = false, length = 50)
+    @Column(nullable = false, length = 50)
     private String ageGroup;
 
     @Size(max = 10)
     @NonNull
-    @Column(name = "gender", nullable = false, length = 10)
+    @Column( nullable = false, length = 10)
     private String gender;
 
 //    @ToString.Exclude
@@ -60,20 +59,29 @@ public class Team {
     Coach coach;
 
     @ToString.Exclude
-    @ManyToMany( cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
-    @JoinTable(name = "team_training",
-        joinColumns = @JoinColumn(name = "team_id"),
-        inverseJoinColumns = @JoinColumn(name = "training_id"))
-    Set<Training> trainings= new LinkedHashSet<>();
+
+    @OneToMany(
+            mappedBy = "team",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    Set<Training> trainings = new HashSet<>();
+
+
+//    @OneToMany( cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
+//    @JoinTable(name = "team_training",
+//        joinColumns = @JoinColumn(name = "team_id"),
+//        inverseJoinColumns = @JoinColumn(name = "training_id"))
+//    Set<Training> trainings= new LinkedHashSet<>();
 
     public void addTraining(Training t){
         trainings.add(t);
-        t.getTeam().add(this);
+        t.setTeam(this);
     }
 
     public void removeTraining(Training t){
         trainings.remove(t);
-        t.getTeam().remove(this);
+        t.setTeam(null);
     }
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
@@ -82,6 +90,9 @@ public class Team {
     public void addPlayer(Player p){
         players.add(p);
         p.setTeam(this);
+    }
+
+    public Team() {
     }
 
     public void removePlayer(Player p){
@@ -96,16 +107,16 @@ public class Team {
         this.coach = coach;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Team team = (Team) o;
-        return Objects.equals(id, team.id) && name.equals(team.name) && ageGroup.equals(team.ageGroup) && gender.equals(team.gender) && Objects.equals(coach, team.coach) && Objects.equals(trainings, team.trainings) && Objects.equals(players, team.players);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, ageGroup, gender, coach, trainings, players);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Team team = (Team) o;
+//        return Objects.equals(id, team.id) && name.equals(team.name) && ageGroup.equals(team.ageGroup) && gender.equals(team.gender) && Objects.equals(coach, team.coach) && Objects.equals(trainings, team.trainings) && Objects.equals(players, team.players);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id, name, ageGroup, gender, coach, trainings, players);
+//    }
 }

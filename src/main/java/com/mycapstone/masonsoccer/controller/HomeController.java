@@ -23,16 +23,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value={"", "/", "home"})
 public class HomeController {
 
-    @Autowired
+
     TrainingService trainingService;
 
     TeamService teamService;
 
+    @Autowired
+    public HomeController(TrainingService trainingService, TeamService teamService) {
+        this.trainingService = trainingService;
+        this.teamService = teamService;
+    }
+
     @GetMapping()
     public String home(Model model){
         log.debug("I am in home controller method");
-        model.addAttribute( "training", trainingService.findAllTraining());
-        model.addAttribute( "team", teamService.findAllTeam());
+        model.addAttribute( "trainings", trainingService.findAllTraining());
+        model.addAttribute( "teams", teamService.findAll());
 
         return "home";
     }
