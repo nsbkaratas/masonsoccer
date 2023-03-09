@@ -54,18 +54,20 @@ public class Team {
 //    @JoinColumn (name = "coach_id")
 ////    @JsonIgnore
 //    Coach coach;
+
+    @ToString.Exclude
     @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, targetEntity = Coach.class)
     @JoinColumn(name = "coach_id", referencedColumnName = "id")
     Coach coach;
 
     @ToString.Exclude
-
     @OneToMany(
             mappedBy = "team",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
     Set<Training> trainings = new HashSet<>();
+
 
 
 //    @OneToMany( cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)

@@ -45,18 +45,26 @@ public class Player {
 
     @NonNull
     @Column(name = "date_of_birth", nullable = false)
-    private LocalDate dateOfBirth;
+    private String dateOfBirth;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
+    @ToString.Exclude
+    @ManyToOne
     @JoinColumn(name = "team_id")
     Team team;
 
+    @ToString.Exclude
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
     @JoinColumn(name = "parent_id")
     Parent parent;
 
+    public Player(@NonNull String firstName, @NonNull String lastName, @NonNull String dateOfBirth, Team team) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.team = team;
+    }
 
-    public Player(@NonNull String firstName, @NonNull String lastName, @NonNull LocalDate dateOfBirth) {
+    public Player(@NonNull String firstName, @NonNull String lastName, @NonNull String dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;

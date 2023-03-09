@@ -37,9 +37,9 @@ public class HomeController {
     @GetMapping()
     public String home(Model model){
         log.debug("I am in home controller method");
-        model.addAttribute( "trainings", trainingService.findAllTraining());
         model.addAttribute( "teams", teamService.findAll());
 
         return "home";
     }
+
 }

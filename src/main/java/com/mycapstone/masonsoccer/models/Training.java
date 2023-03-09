@@ -52,11 +52,10 @@ public class Training {
     @Column(name = "field_name", nullable = false, length = 50)
     private String fieldName;
 
-    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @ToString.Exclude
+    @ManyToOne
     @JoinColumn(name="team_id")
     Team team;
-
-
 
     public Training(@NonNull String date, @NonNull String startTime, @NonNull String duration, @NonNull String fieldName) {
         this.date = date;
@@ -64,6 +63,16 @@ public class Training {
         this.duration = duration;
         this.fieldName = fieldName;
     }
+
+    public Training(@NonNull String date, @NonNull String startTime, @NonNull String duration, @NonNull String fieldName, Team team) {
+        this.date = date;
+        this.startTime = startTime;
+        this.duration = duration;
+        this.fieldName = fieldName;
+        this.team = team;
+    }
+
+
 
 //    @Override
 //    public boolean equals(Object o) {

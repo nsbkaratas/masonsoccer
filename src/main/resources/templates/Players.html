@@ -14,7 +14,7 @@
         <div class="table-responsive">
           <table class="table table-bordered table-striped" id="doctor">
             <thead>
-              <tr>
+              <tr >
                 <th scope="col">ID</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
@@ -24,11 +24,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row"></th>
-                <td></td>
-                <td></td>
-                <td></td>
+              <tr th:each="player:${players}">
+                <td th:text="${player.id}" ></td>
+                <td th:text="${player.firstName}" ></td>
+                <td th:text="${player.lastName}" ></td>
+                <td th:text="${player.dateOfBirth}" ></td>
                 <td></td>
                 <td>
                   <a class="btn btn-info">Update</a>

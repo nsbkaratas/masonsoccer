@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author nesibe karatas
@@ -45,5 +46,14 @@ public class TrainingService {
         }else{
             throw new Exception("Adding team to training Failed");
         }
+    }
+    public void delete(Training training) {
+        trainingRepoI.delete(training);
+    }
+
+
+
+    public Optional<Training> findById(Integer id) {
+        return trainingRepoI.findById(id);
     }
 }
