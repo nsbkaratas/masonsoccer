@@ -9,10 +9,13 @@
   </header>
     <main>
         <div class="bg-light">
-            <h1>Team's Training Schedule</h1>
+            <div class="text-center my-5">
+                <h1 class="display-4 fw-bolder text-dark mb-2"
+                    th:text="'Team ' + ${team.name} + ' Training Schedule'"></h1>
+            </div>
             <br /><br />
             <div class="table-responsive">
-                <table class="table table-bordered table-striped" id="doctor">
+                <table class="table table-bordered table-striped" id="training">
                     <thead>
                     <tr>
                         <th scope="col">Date</th>
@@ -31,12 +34,12 @@
 
                         <td>
 <!--                            <a class="btn btn-info" th:href="@{/training/delete/{id}(id=${training.id})}">Update</a>-->
-                            <a class="btn btn-danger ml-2" th:href="@{/training/delete/{id}(id=${schedule.id})}">Delete</a>
+<!--                            <a class="btn btn-danger ml-2" th:href="@{/training/delete/{id}(id=${schedule.id})}">Delete</a>-->
                         </td>
                     </tr>
                     </tbody>
                 </table>
-                <a class="btn btn-primary">Add Team</a>
+<!--                <a th:href="@{/training/addTraining}" class="btn btn-primary">Add Team</a>-->
                 <br /><br />
             </div>
         </div>

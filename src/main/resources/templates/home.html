@@ -23,8 +23,6 @@
             </div>
         </section>
     </div>
-
-
     <div class="album py-5 bg-light">
         <div class="container ">
 
@@ -38,48 +36,14 @@
                                     <li>Team name:<span th:text="${team.name}"></span> </li>
                                 <li>Age group:<span th:text="${team.ageGroup}"></span> </li>
                             <li>Team name:<span th:text="${team.id}"></span> </li>
-
-<!--                            <li th:each="training : ${team.trainings}">-->
-<!--                                    <li>Team name: <span th:text="${training.getFieldName()}"></span></li>-->
-<!--                                    <li>Team name:<span th:text="${training.duration}"></span> </li>-->
-<!--                                    <li>Team name:<span th:text="${training.startTime}"></span> </li>-->
                             </li>
                                 </ul>
                             </p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-end">
                                     <a th:href="@{/teamschedule(id=${team.id})}" class="btn btn-success"
-                                    >Check Team</a
+                                    >View Team Schedule</a
                                     >
-                                </div>
-<!--                                <div class="btn-group">-->
-<!--                                    <button type="button" class="btn btn-sm btn-outline-secondary">View Schedule</button>-->
-<!--                                </div>-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img class="card-img-top" src="./images/kickers.jpg" alt="">
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img class="card-img-top" src="./images/kickers.jpg" alt="">
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                 </div>
                             </div>
                         </div>

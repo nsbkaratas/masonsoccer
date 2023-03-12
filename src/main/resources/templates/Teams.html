@@ -12,32 +12,40 @@
         <h1>Teams List</h1>
         <br /><br />
         <div class="table-responsive">
-          <table class="table table-bordered table-striped" id="doctor">
+          <table class="table table-bordered table-striped" id="team">
             <thead>
               <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Gender</th>
                 <th scope="col">AgeGroup</th>
-                <th scope="col">Coach</th>
+<!--                <th scope="col">Coach</th>-->
                 <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr >
-                <th scope="row"></th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+              <tr th:each="team:${teams}">
+                <th scope="row"th:text="${team.id}"></th>
+                <td th:text="${team.name}"></td>
+                <td th:text="${team.gender}"></td>
+                <td th:text="${team.ageGroup}"></td>
+<!--            <td th:text="${team.coach.id}"></td>-->
                 <td>
-                  <a class="btn btn-info">Update</a>
-                  <a class="btn btn-danger ml-2">Delete</a>
-                </td>
+
+<!--                  <form class="row g-3 needs-validation" method="post"  th:href="@{/teams/deleteTeam/{id}(id=${team.id})}" >-->
+<!--                    &lt;!&ndash; <input type="text" th:attr="value=${portfolio.stock.ticker}" hidden> &ndash;&gt;-->
+<!--                    <button class="btn btn-danger ml-2" type="submit">DEL</button>-->
+<!--                  </form>-->
+
+
+                  <a class="btn btn-info"  th:href="@{/teams/addteam}">Update Team</a>
+<!--                  <a class="btn btn-info" >Update Training</a>-->
+                  <a class="btn btn-danger ml-2" th:href="@{/teams/deleteTeam/{id}(id=${team.id})}">Delete</a>
+               </td>
               </tr>
             </tbody>
           </table>
-          <a class="btn btn-primary">Add Team</a>
+          <a th:href="@{/teams/addteam}" class="btn btn-primary">Add New Team</a>
           <br /><br />
         </div>
       </div>

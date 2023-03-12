@@ -62,10 +62,10 @@ public class Coach {
     @NonNull
     @Column(name = "password", nullable = false, length = 50)
     private String password;
-
+//
 //    @ToString.Exclude
 //    @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
-//    Set<Team> team = new LinkedHashSet<>() ;
+//    Set<Team> teams = new LinkedHashSet<>() ;
     @OneToOne(mappedBy = "coach")
     Team team;
 

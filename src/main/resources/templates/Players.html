@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
   <!-- Head-->
-  <div th:replace="fragments/head :: head" />
+  <div th:replace="~{fragments/head :: head}" />
   <body>
     <header>
       <!-- Responsive navbar-->
-      <div th:replace="fragments/nav :: nav" />
+      <div th:replace="~{fragments/nav :: nav}" />
     </header>
     <main id="main-content">
       <div class="bg-light">
         <h1>Players List</h1>
         <br /><br />
         <div class="table-responsive">
-          <table class="table table-bordered table-striped" id="doctor">
+          <table class="table table-bordered table-striped" id="player">
             <thead>
               <tr >
                 <th scope="col">ID</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Date of Birth</th>
-                <th scope="col">Team</th>
+<!--                <th scope="col">Team</th>-->
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -29,15 +29,14 @@
                 <td th:text="${player.firstName}" ></td>
                 <td th:text="${player.lastName}" ></td>
                 <td th:text="${player.dateOfBirth}" ></td>
-                <td></td>
                 <td>
-                  <a class="btn btn-info">Update</a>
-                  <a class="btn btn-danger ml-2">Delete</a>
+                  <a class="btn btn-info" th:href="@{/players/addplayer}">Update</a>
+                  <a class="btn btn-danger ml-2" th:href="@{/players/deleteplayer/{id}(id=${player.id})}">Delete</a>
                 </td>
               </tr>
             </tbody>
           </table>
-          <a class="btn btn-primary">Add Team</a>
+          <a th:href="@{/players/addplayer}" class="btn btn-primary">Add Player</a>
           <br /><br />
         </div>
       </div>

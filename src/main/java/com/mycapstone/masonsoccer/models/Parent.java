@@ -63,17 +63,17 @@ public class Parent {
     @Column(name = "password", nullable = false, length = 50)
     private String password;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
-    Set<Player> players = new LinkedHashSet<>();
-
-    public void addPlayer(Player p){
-        players.add(p);
-        p.setParent(this);
-    }
-    public void removePlayer(Player p){
-        players.remove(p);
-        p.setParent(null);
-    }
+//    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+//    Set<Player> players = new LinkedHashSet<>();
+//
+//    public void addPlayer(Player p){
+//        players.add(p);
+//        p.setParent(this);
+//    }
+//    public void removePlayer(Player p){
+//        players.remove(p);
+//        p.setParent(null);
+//    }
 
     public Parent(@NonNull String firstName, @NonNull String lastName, @NonNull String address, @NonNull String phoneNumber, @NonNull String email, @NonNull String password) {
         this.firstName = firstName;
@@ -84,16 +84,16 @@ public class Parent {
         this.password = password;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Parent parent = (Parent) o;
-        return Objects.equals(id, parent.id) && firstName.equals(parent.firstName) && lastName.equals(parent.lastName) && address.equals(parent.address) && phoneNumber.equals(parent.phoneNumber) && email.equals(parent.email) && password.equals(parent.password) && Objects.equals(players, parent.players);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, phoneNumber, email, password, players);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Parent parent = (Parent) o;
+//        return Objects.equals(id, parent.id) && firstName.equals(parent.firstName) && lastName.equals(parent.lastName) && address.equals(parent.address) && phoneNumber.equals(parent.phoneNumber) && email.equals(parent.email) && password.equals(parent.password) && Objects.equals(players, parent.players);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id, firstName, lastName, address, phoneNumber, email, password, players);
+//    }
 }

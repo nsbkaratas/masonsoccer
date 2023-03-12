@@ -31,22 +31,18 @@ import java.util.Set;
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "team_id", nullable = false)
     private Integer id;
 
     @Size(max = 50)
     @NonNull
-    @Column(nullable = false, length = 50)
     private String name;
 
     @Size(max = 50)
     @NonNull
-    @Column(nullable = false, length = 50)
     private String ageGroup;
 
     @Size(max = 10)
     @NonNull
-    @Column( nullable = false, length = 10)
     private String gender;
 
 //    @ToString.Exclude
@@ -69,12 +65,6 @@ public class Team {
     Set<Training> trainings = new HashSet<>();
 
 
-
-//    @OneToMany( cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
-//    @JoinTable(name = "team_training",
-//        joinColumns = @JoinColumn(name = "team_id"),
-//        inverseJoinColumns = @JoinColumn(name = "training_id"))
-//    Set<Training> trainings= new LinkedHashSet<>();
 
     public void addTraining(Training t){
         trainings.add(t);
@@ -102,7 +92,8 @@ public class Team {
         p.setTeam(null);
     }
 
-    public Team(@NonNull String name, @NonNull String ageGroup, @NonNull String gender, Coach coach) {
+
+    public Team(String name, String ageGroup,  String gender, Coach coach) {
         this.name = name;
         this.ageGroup = ageGroup;
         this.gender = gender;

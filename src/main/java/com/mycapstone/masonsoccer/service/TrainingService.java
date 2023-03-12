@@ -32,9 +32,20 @@ public class TrainingService {
     }
 
 
-    public void saveOrUpdate(Training training){
-        log.info(training.toString());
-        trainingRepoI.save(training);
+    public Training saveOrUpdate(Training training){
+        if(trainingRepoI.findByDateAndDurationAndFieldNameAndStartTimeAllIgnoreCase(training.getDate(),training.getDuration(),training.getFieldName(),training.getStartTime()).isPresent()) {
+            log.info(training.toString());
+            Training currentTraining = trainingRepoI.findByDateAndDurationAndFieldNameAndStartTimeAllIgnoreCase(training.getDate(), training.getDuration(), training.getFieldName(), training.getStartTime()).get();
+            currentTraining.setDate(training.getDate());
+            currentTraining.setDuration(training.getDuration());
+            currentTraining.setFieldName(training.getFieldName());
+            currentTraining.setStartTime(training.getStartTime());
+            currentTraining.setTeam(training.getTeam());
+            return trainingRepoI.save(currentTraining);
+        }else{
+                log.debug(training.getDate() +training.getFieldName()+"does not exist");
+                return trainingRepoI.save(training);
+            }
     }
 
     public void addTeam(Team team, Training training) throws Exception {

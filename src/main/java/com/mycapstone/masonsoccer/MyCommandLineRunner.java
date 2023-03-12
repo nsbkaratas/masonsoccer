@@ -79,6 +79,16 @@ public class MyCommandLineRunner implements CommandLineRunner {
         teamRepoI.saveAndFlush(team4);
         Team team5 = new Team("Lions","7 to 10","Boys" );
         teamRepoI.saveAndFlush(team5);
+//        Team team1 = new Team( "Kickers", "3 to 5");
+//        teamRepoI.saveAndFlush(team1);
+//        Team team2 = new Team("Crickets","5 to 7");
+//        teamRepoI.saveAndFlush(team2);
+//        Team team3 = new Team("Wildcats","7 to 10");
+//        teamRepoI.saveAndFlush(team3);
+//        Team team4 = new Team("Tigers","5 to 7");
+//        teamRepoI.saveAndFlush(team4);
+//        Team team5 = new Team("Lions","7 to 10");
+//        teamRepoI.saveAndFlush(team5);
 
         Training training1 = new Training("12-12-2022","1", "1","Mason", team1);
         trainingRepoI.saveAndFlush(training1);
