@@ -47,11 +47,6 @@ public class TeamScheduleController {
         return "TeamSchedule";
     }
 
-
-
-
-
-
 //    @GetMapping()
 //    public String viewSchedule(){
 //        return "TeamSchedule";

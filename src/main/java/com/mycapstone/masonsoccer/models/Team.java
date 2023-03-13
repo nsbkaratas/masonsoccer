@@ -52,8 +52,8 @@ public class Team {
 //    Coach coach;
 
     @ToString.Exclude
-    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, targetEntity = Coach.class)
-    @JoinColumn(name = "coach_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "coach_id")
     Coach coach;
 
     @ToString.Exclude

@@ -4,6 +4,7 @@ import com.mycapstone.masonsoccer.dao.PlayerRepoI;
 import com.mycapstone.masonsoccer.dao.TeamRepoI;
 import com.mycapstone.masonsoccer.dao.TrainingRepoI;
 import com.mycapstone.masonsoccer.exception.TeamNotFoundException;
+import com.mycapstone.masonsoccer.models.Coach;
 import com.mycapstone.masonsoccer.models.Player;
 import com.mycapstone.masonsoccer.models.Team;
 import com.mycapstone.masonsoccer.models.Training;
@@ -28,6 +29,8 @@ public class TeamService {
     @Autowired
     private final PlayerRepoI playerRepoI;
 
+    @Autowired
+    CoachService coachService;
     TrainingRepoI trainingRepoI;
     TeamRepoI teamRepoI;
     @Autowired
@@ -67,23 +70,19 @@ public class TeamService {
 
     }
 
-    public void addPlayer(String name, Player player){
-        log.warn("addPlayer to team in service layer invoked");
-//        Team team = teamRepoI.findByName(name).orElseThrow();
-//        player =playerRepoI.save(player);
-//        team.addPlayer(player);
-//        teamRepoI.save(team);
-    }
-//    public Set<Training> findTeamTrainings(Integer id){
-//        log.warn("find team training method");
-//        log.warn("Number of trainings"+ findTeamById(id).getTrainings());
-//        return findTeamById(id).getTrainings();
-//    }
+
     public Set<Training> findTeamTrainings(Integer id){
         log.warn("inside findTeamTrainings");
         Team team = findTeamById(id);
         log.warn("found team");
         return team.getTrainings();
+    }
+
+    public Set<Player> findTeamPlayers(Integer id) {
+        log.warn("inside findteamplayers");
+        Team team = findTeamById(id);
+        log.warn("found team");
+        return team.getPlayers();
     }
 
     public void deleteTeam(Integer id) throws Exception{
@@ -94,19 +93,22 @@ public class TeamService {
          throw new Exception("can't find team");
     }
 
-    public Team saveOrUpdateTeam(Team team){
+    public Team saveOrUpdateTeam(Team team, Coach coach){
         if(teamRepoI.findByNameAllIgnoreCase(team.getName()).isPresent()) {
-            log.debug("team " + team.getName() + " exist");
-            Team currentTeam = teamRepoI.findByNameAllIgnoreCase(team.getName()).get();
-            currentTeam.setName(team.getName());
-            currentTeam.setAgeGroup(team.getAgeGroup());
-            currentTeam.setGender(team.getGender());
-            return teamRepoI.save(currentTeam);
+            log.warn("team"+ team.getName()+" exist");
+            String coachName= team.getCoach().getFirstName()+" "+team.getCoach().getLastName();
+            Team selectedTeam = teamRepoI.findByNameAllIgnoreCase(team.getName()).get();
+            selectedTeam.setName(team.getName());
+            selectedTeam.setGender(team.getGender());
+            selectedTeam.setAgeGroup(team.getAgeGroup());
+            selectedTeam.setCoach(coach);
+            return teamRepoI.save(selectedTeam);
         }else {
             log.debug("team name "+ team.getName()+" does not exist");
             return teamRepoI.save(team);
         }
     }
+
 
 }
 

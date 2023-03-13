@@ -31,43 +31,36 @@ public class Coach {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Integer id;
     @Size(max = 50)
     @NonNull
-    @Column(name = "first_name", nullable = false, length = 50)
     private String firstName;
 
     @Size(max = 50)
     @NonNull
-    @Column(name = "last_name", nullable = false, length = 50)
     private String lastName;
 
     @Size(max = 100)
     @NonNull
-    @Column(name = "email", nullable = false, length = 100)
     private String email;
 
     @Size(max = 20)
     @NonNull
-    @Column(name = "phone_number", nullable = false, length = 20)
     private String phoneNumber;
 
     @Size(max = 50)
     @NonNull
-    @Column(name = "username", nullable = false, length = 50)
     private String username;
 
     @Size(max = 50)
     @NonNull
-    @Column(name = "password", nullable = false, length = 50)
     private String password;
 //
 //    @ToString.Exclude
 //    @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
 //    Set<Team> teams = new LinkedHashSet<>() ;
-    @OneToOne(mappedBy = "coach")
-    Team team;
+    @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    Set<Team> team = new LinkedHashSet<>();
 
 //    public void addTeam(Team t){
 //        team.add(t);

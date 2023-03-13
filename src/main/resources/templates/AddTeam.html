@@ -68,24 +68,28 @@
                         <div class="error"></div>
                       </div>
                     </div>
-                  </div>
-<!--                    <div class="col-md-6 mb-4">-->
-<!--                      <div class="form-outline">-->
-<!--                        <label class="form-label">Select Coach</label>-->
-<!--                        <select-->
-<!--                          class="form-control form-control-lg"-->
-<!--                          name="team"-->
-<!--                        >-->
-<!--                        <option>José Mourinho</option>-->
-<!--                        <option>Alex Ferguson</option>-->
-<!--                        <option>Marcello Lippi</option>-->
-<!--                        <option>Arsène Wenger</option>-->
-<!--                        </select>-->
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <label class="form-label" for="coachId">Assign a Coach to Team</label>
+                        <select
+                                th:field="*{coach}"
+                                id="coachId"
+                                class="form-control form-control-lg"
+                                required
+                        >
+                          <option
+                                  th:each="coach:${listOfCoaches}"
+                                  th:value="${coach.id}"
+                                  th:text="${coach.firstName}+' '+${coach.lastName}"
+                          />
+                        </select>
 
-<!--                        <div class="error"></div>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
+                        <div class="error"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  
 
                   <div class="row">
                     <div class="mt-4 pt-2">
@@ -103,22 +107,6 @@
           </div>
         </div>
       </div>
-
-      <!--    <form method="POST">-->
-
-      <!--        <input style="width:500px" type="text"  class="form-control col-4 mb-4" placeholder="Name" />-->
-
-      <!--        <input style="width:500px" type="text"  class="form-control col-4 mb-4" placeholder="Enter Email" />-->
-
-      <!--        <label>Select Department</label>-->
-      <!--        <select style="width:300px" >-->
-      <!--            <option />-->
-      <!--        </select>-->
-      <!--        <br/><br/><br/>-->
-      <!--        <button type="submit" class="btn btn-primary col-2">Save</button>-->
-      <!--        <input type="hidden" />-->
-
-      <!--    </form>-->
     </main>
     <div class="container text-light">
       <!-- Footer-->

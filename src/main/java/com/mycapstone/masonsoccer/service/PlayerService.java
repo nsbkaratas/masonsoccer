@@ -37,19 +37,20 @@ public class PlayerService {
        playerRepoI.delete(player);
     }
 
-    public Object saveOrUpdatePlayer(Player player) {
+    public Player saveOrUpdatePlayer(Player player, Team team) {
         if(playerRepoI.findByFirstNameAndLastName(player.getFirstName(),player.getLastName()).isPresent()){
             log.warn("player "+player.getFirstName()+" exist");
             String teamName= player.getTeam().getName();
             Player selectedPlayer=playerRepoI.findByFirstNameAndLastName(player.getFirstName(),player.getLastName()).get();
-            Optional<Team> team = teamRepoI.findByName(teamName);
+//            Optional<Team> optionalTeam = teamRepoI.findByName(teamName);
             selectedPlayer.setFirstName(player.getFirstName());
             selectedPlayer.setLastName(player.getLastName());
             selectedPlayer.setDateOfBirth(player.getDateOfBirth());
-            teamService.addPlayer(teamName,player);
+            selectedPlayer.setTeam(team);
             return playerRepoI.save(player);
         }else{
             log.warn("player name"+ player.getFirstName()+" does not exist");
+            player.setTeam(team);
             return playerRepoI.save(player);
         }
     }

@@ -1,9 +1,13 @@
 package com.mycapstone.masonsoccer.controller;
 
+import com.mycapstone.masonsoccer.dao.CoachRepoI;
 import com.mycapstone.masonsoccer.dao.TeamRepoI;
 import com.mycapstone.masonsoccer.dao.TrainingRepoI;
+import com.mycapstone.masonsoccer.models.Coach;
+import com.mycapstone.masonsoccer.models.Player;
 import com.mycapstone.masonsoccer.models.Team;
 import com.mycapstone.masonsoccer.models.Training;
+import com.mycapstone.masonsoccer.service.CoachService;
 import com.mycapstone.masonsoccer.service.TeamService;
 import com.mycapstone.masonsoccer.service.TrainingService;
 import lombok.AccessLevel;
@@ -28,6 +32,10 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequestMapping("/teams")
 public class TeamController {
+    @Autowired
+    CoachService coachService;
+    @Autowired
+    private final CoachRepoI coachRepoI;
     TeamRepoI teamRepoI;
 
     TeamService teamService;
@@ -37,11 +45,13 @@ public class TeamController {
     TrainingRepoI trainingRepoI;
     @Autowired
     public TeamController(TeamService teamService, TrainingService trainingService, TrainingRepoI trainingRepoI,
-                          TeamRepoI teamRepoI) {
+                          TeamRepoI teamRepoI,
+                          CoachRepoI coachRepoI) {
         this.teamService = teamService;
         this.trainingService = trainingService;
         this.trainingRepoI = trainingRepoI;
         this.teamRepoI = teamRepoI;
+        this.coachRepoI = coachRepoI;
     }
 
     @GetMapping()
@@ -51,21 +61,35 @@ public class TeamController {
         return "teams";
     }
 
+    @GetMapping("/teamsplayers")
+    public String viewTeamsPlayers(@RequestParam("id") Integer id, Model model){
+        log.warn("viewPlayers with team id: "+id);
+        model.addAttribute("team", teamService.findTeamById(id));
+        model.addAttribute("players", teamService.findTeamPlayers(id));
+        return "teamsplayers";
+    }
+
+
     @GetMapping("/addteam")
-    public String addTeamForm(Team team, Model model){
+    public String addTeamForm(@ModelAttribute("team") Team team, Model model){
         log.debug("addTeamForm invoked");
         model.addAttribute("team", new Team());
-        List<String> genderTypes=Arrays.asList("Female", "Male", "NA");
+        List<String> genderTypes=Arrays.asList("Girls", "boys", "NA");
         model.addAttribute("genderTypes", genderTypes);
-        List<String> listOfCoaches= Arrays.asList("José Mourinho","Alex Ferguson","Marcello Lippi","Arsène Wenger");
+        List<Coach> listOfCoaches= coachService.findAll();
         model.addAttribute("listOfCoaches", listOfCoaches);
         return "addteam";
     }
 
-    @PostMapping("/addteam/save")
-    public String saveTeam(@ModelAttribute("team") Team team, Model model){
+//    @PostMapping("/addplayer/save")
+//    public String savePlayer(@ModelAttribute("coach") Coach coach, Model model, Team team){
+//        model.addAttribute("coach", coachService.saveOrUpdateCoach(coach));
+//        return "redirect:/players";
+//    }
 
-        model.addAttribute("team", teamService.saveOrUpdateTeam(team));
+    @PostMapping("/addteam/save")
+    public String saveTeam(@ModelAttribute("team") Team team, Coach coach,Model model){
+        model.addAttribute("team", teamService.saveOrUpdateTeam(team, coach));
         return "redirect:/teams";
     }
 

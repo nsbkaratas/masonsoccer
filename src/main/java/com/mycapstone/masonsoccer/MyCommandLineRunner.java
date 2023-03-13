@@ -65,9 +65,17 @@ public class MyCommandLineRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-//        Coach coach1 = new Coach("Yalcin","Karatas","yk@ex.com","123456677","yzk","password");
-//        Coach coach2 = new Coach("Safiye", "Karatas", "sk@ex.com", "23454","sek","password");
 
+        Coach coach1 = new Coach("José","Mourinho","jm@ex.com","123456677","mourinho","password1");
+        coachRepoI.saveAndFlush(coach1);
+        Coach coach2 = new Coach("Alex", "Ferguson", "af@ex.com", "23454","ferguson","password2");
+        coachRepoI.saveAndFlush(coach2);
+        Coach coach3 = new Coach("Marcello","Lippi","ml@ex.com","123456677","lippi","password3");
+        coachRepoI.saveAndFlush(coach3);
+        Coach coach4 = new Coach("Arsène","Wenger","aw@ex.com","123456677","wenger","password4");
+        coachRepoI.saveAndFlush(coach4);
+        Coach coach5 = new Coach("Yalcin","Karatas","yk@ex.com","123456677","karatas","password5");
+        coachRepoI.saveAndFlush(coach5);
 
         Team team1 = new Team( "Kickers", "3 to 5", "NA");
         teamRepoI.saveAndFlush(team1);

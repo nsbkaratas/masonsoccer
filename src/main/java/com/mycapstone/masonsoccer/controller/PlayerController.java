@@ -58,13 +58,13 @@ public class PlayerController {
     public String addPlayerForm(@ModelAttribute("player") Player player,Model model){
         log.warn("addplayer form displayed");
         model.addAttribute("player", new Player());
-        List<Team> teams = teamRepoI.findAll();
+        List<Team> teams = teamService.findAll();
         model.addAttribute("teams", teams);
         return "addplayer";
     }
     @PostMapping("/addplayer/save")
     public String savePlayer(@ModelAttribute("player") Player player, Model model, Team team){
-        model.addAttribute("player", playerService.saveOrUpdatePlayer(player));
+        model.addAttribute("player", playerService.saveOrUpdatePlayer(player,team));
         return "redirect:/players";
     }
 
