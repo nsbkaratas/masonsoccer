@@ -9,6 +9,7 @@ import com.mycapstone.masonsoccer.models.Training;
 import com.mycapstone.masonsoccer.service.CoachService;
 import com.mycapstone.masonsoccer.service.TeamService;
 import com.mycapstone.masonsoccer.service.TrainingService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +18,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author nesibe karatas
@@ -52,8 +55,14 @@ public class TeamController {
     }
 
     @GetMapping()
-    public String teamsList(Model model){
+    public String teamsList(Model model, HttpServletRequest request) throws Exception{
         log.debug("teams listed");
+        Coach coach= null;
+        Principal p =request.getUserPrincipal();
+        if(p != null){
+            coach = coachRepoI.findByEmail(p.getName()).get();
+        }
+        model.addAttribute("coach", coach);
         model.addAttribute("teams", teamService.findAll());
         return "teams";
     }
@@ -90,10 +99,30 @@ public class TeamController {
         return "redirect:/teams";
     }
 
+//    @GetMapping("/deleteTeam/{id}")
+//    public String deleteTeam(@PathVariable(name="id") Integer id) throws Exception{
+//        log.debug("Value of the id "+String.valueOf(id));
+//        teamService.deleteTeam(id);
+//        return "redirect:/teams";
+//    }
     @GetMapping("/deleteTeam/{id}")
-    public String deleteTeam(@PathVariable(name="id") Integer id) throws Exception{
+    public String deleteTeam(@PathVariable(name="id") Integer id, Model model) throws Exception{
         log.debug("Value of the id "+String.valueOf(id));
-        teamService.deleteTeam(id);
+        Team team = teamService.findTeamById(id);
+        String coachName= team.getCoach().getFirstName();
+        Optional<Coach> coach= coachService.findByFirstName(coachName);
+        coachService.removeTeam(coach.get().getId(),team);
+        teamService.deleteTeam(team);
         return "redirect:/teams";
     }
 }
+
+
+
+
+
+
+
+
+
+

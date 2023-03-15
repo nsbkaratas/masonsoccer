@@ -67,4 +67,8 @@ public class TrainingService {
     public Optional<Training> findById(Integer id) {
         return trainingRepoI.findById(id);
     }
+
+    public List<Training> findAll() {
+        return trainingRepoI.findAll();
+    }
 }

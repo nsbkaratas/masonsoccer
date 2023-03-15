@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
   <!-- Head-->
   <div th:replace="~{fragments/head :: head}" />
   <body>
@@ -23,31 +23,33 @@
                 <th scope="col">Actions</th>
               </tr>
             </thead>
+<!--            <tbody>-->
+<!--              <tr th:each="team:${teams}"  >-->
+<!--                <th scope="row"th:text="${team.id}"></th>-->
+<!--                <td th:text="${team.name}"></td>-->
+<!--                <td th:text="${team.gender}"></td>-->
+<!--                <td th:text="${team.ageGroup}"></td>-->
+<!--                <td  th:text="${team.coach.firstName}+' '+${team.coach.lastName}"></td>-->
+<!--                <td>-->
+<!--                  <a class="btn btn-info"  th:href="@{/teams/team}">Update Team</a>-->
+<!--                  <a class="btn btn-info"  th:href="@{/teams/teamsplayers(id=${team.id})}" >View Players</a>-->
+<!--                  <a class="btn btn-danger ml-2" th:href="@{/teams/deleteTeam/{id}(id=${team.id})}">Delete</a>-->
+<!--               </td>-->
+<!--              </tr>-->
+<!--            </tbody>-->
             <tbody>
-              <tr th:each="team:${teams}"  >
-                <th scope="row"th:text="${team.id}"></th>
-                <td th:text="${team.name}"></td>
-                <td th:text="${team.gender}"></td>
-                <td th:text="${team.ageGroup}"></td>
-                <td  th:text="${team.coach.firstName}+' '+${team.coach.lastName}"></td>
-
-
-<!--                  <h1 class="display-4 fw-bolder text-dark mb-2"-->
-<!--                      th:text="'Team ' + ${team.name} + ' Training Schedule'"></h1>-->
-
-                <td>
-
-<!--                  <form class="row g-3 needs-validation" method="post"  th:href="@{/teams/deleteTeam/{id}(id=${team.id})}" >-->
-<!--                    &lt;!&ndash; <input type="text" th:attr="value=${portfolio.stock.ticker}" hidden> &ndash;&gt;-->
-<!--                    <button class="btn btn-danger ml-2" type="submit">DEL</button>-->
-<!--                  </form>-->
-
-
-                  <a class="btn btn-info"  th:href="@{/teams/addteam}">Update Team</a>
-                  <a class="btn btn-info"  th:href="@{/teams/teamsplayers(id=${team.id})}" >View Players</a>
-                  <a class="btn btn-danger ml-2" th:href="@{/teams/deleteTeam/{id}(id=${team.id})}">Delete</a>
-               </td>
-              </tr>
+            <tr th:each="team:${teams}"  >
+              <th scope="row"th:text="${team.id}"></th>
+              <td th:text="${team.name}"></td>
+              <td th:text="${team.gender}"></td>
+              <td th:text="${team.ageGroup}"></td>
+              <td  th:text="${team.coach.firstName}+' '+${team.coach.lastName}"></td>
+              <td>
+                <a class="btn btn-info"  th:href="@{/teams/team}">Update Team</a>
+                <a class="btn btn-info"  th:href="@{/teams/teamsplayers(id=${team.id})}" >View Players</a>
+                <a class="btn btn-danger ml-2" th:href="@{/teams/deleteTeam/{id}(id=${team.id})}">Delete</a>
+              </td>
+            </tr>
             </tbody>
           </table>
             <a th:href="@{/teams/addteam}" class="btn btn-primary">Add New Team</a>

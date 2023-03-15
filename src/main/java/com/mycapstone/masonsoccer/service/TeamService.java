@@ -87,13 +87,18 @@ public class TeamService {
         return team.getPlayers();
     }
 
-    public void deleteTeam(Integer id) throws Exception{
-     Optional<Team> wantToDelete = teamRepoI.findById(id);
-     if(wantToDelete.isPresent())
-         teamRepoI.delete(wantToDelete.get());
-     else
-         throw new Exception("can't find team");
+//    public void deleteTeam(Integer id) throws Exception{
+//     Optional<Team> wantToDelete = teamRepoI.findById(id);
+//     if(wantToDelete.isPresent())
+//         teamRepoI.delete(wantToDelete.get());
+//     else
+//         throw new Exception("can't find team");
+//    }
+    public void deleteTeam(Team team){
+        log.warn("delete team invoked in service layer");
+        teamRepoI.delete(team);
     }
+
 
     public Team saveOrUpdateTeam(Team team, Coach coach){
         if(teamRepoI.findByNameAllIgnoreCase(team.getName()).isPresent()) {

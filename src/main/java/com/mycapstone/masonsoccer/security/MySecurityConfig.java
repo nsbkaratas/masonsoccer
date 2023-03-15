@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,6 +17,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class MySecurityConfig {
 
     @Autowired
@@ -36,16 +38,14 @@ public class MySecurityConfig {
         return authConfig.getAuthenticationManager();
     }
 
-
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf().disable()
                 .authorizeHttpRequests((requests)->requests
                     .requestMatchers("/","/index","/css/**", "/javascript/**").permitAll()
-                    .requestMatchers("/teams/**","/players/**","/teamschedule/**").hasRole("ADMIN")
-                    .requestMatchers("/players/**","/teamschedule/**").hasAnyRole("USER","ADMIN")
+                        .requestMatchers("/teams","/teams/teamsplayers/**","/players/**","/teamschedule").hasAuthority("ROLE_COACH")
+                        .requestMatchers("/teams/**","/players/**","/teamschedule/**").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

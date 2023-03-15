@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>MasonSoccer</title>
@@ -32,24 +32,32 @@
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/players}">Players</a>
                 </li>
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" th:href="@{/about}"></a>-->
-<!--                </li>-->
+
             </ul>
 
-            <ul class="navbar-nav ms-auto">
-                <li >
-                    <a class="nav-link " th:href="@{/login}" role="button"  aria-expanded="false">
-                        Sign In
+
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="fname" role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">
+
                     </a>
-                    <!-- <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/login}">Sign In</a></li>
-                        <li><a class="dropdown-item" th:href="@{/register}">Register</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" th:href="@{/logout}">Sign Out</a></li>
-                    </ul> -->
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+                    </ul>
                 </li>
             </ul>
+
+<!--            <ul class="navbar-nav ms-auto">-->
+<!--                -->
+<!--                <li >-->
+<!--                    <a class="nav-link " th:href="@{/login}" role="button"  aria-expanded="false">-->
+<!--                        Sign In-->
+<!--                    </a>-->
+
+<!--                </li>-->
+<!--            </ul>-->
         </div>
     </div>
 </nav>

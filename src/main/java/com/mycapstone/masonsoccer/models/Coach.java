@@ -53,31 +53,30 @@ public class Coach {
     @NonNull
     private String username;
 
-
     @NonNull @Setter(AccessLevel.NONE)
     private String password;
-//
+
 //    @ToString.Exclude
 //    @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
 //    Set<Team> teams = new LinkedHashSet<>() ;
     @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
     Set<Team> team = new LinkedHashSet<>();
 
-//    public void addTeam(Team t){
-//        team.add(t);
-//        t.setCoach(this);
-//    }
-//    public void removeTeam(Team t){
-//        team.remove(t);
-//        t.setCoach(null);
-//    }
+    public void addTeam(Team t){
+        team.add(t);
+        t.setCoach(this);
+    }
+    public void removeTeam(Team t){
+        team.remove(t);
+        t.setCoach(null);
+    }
     public Coach(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String phoneNumber, @NonNull String username, @NonNull String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.username = username;
-        this.password = setPassword(password);
+        this.password = password;
     }
     public String setPassword(String password) {
        return this.password = new BCryptPasswordEncoder(4).encode(password);

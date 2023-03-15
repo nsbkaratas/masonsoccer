@@ -9,4 +9,6 @@ import java.util.Optional;
 @Repository
 public interface CoachRepoI extends JpaRepository<Coach, Integer> {
     Optional<Coach> findByEmail( String email);
+
+    Optional<Coach> findByFirstName(String coachName);
 }

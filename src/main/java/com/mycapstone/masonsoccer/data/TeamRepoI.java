@@ -11,5 +11,6 @@ public interface TeamRepoI extends JpaRepository<Team, Integer> {
 
     Optional<Team> findByNameAllIgnoreCase(String name);
 
+    Optional<Team> findByCoach_Email(String email);
     Optional<Team> findByName(String name);
 }

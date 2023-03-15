@@ -11,6 +11,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -55,28 +56,30 @@ public class MyCommandLineRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 
-        Coach coach1 = new Coach("José","Mourinho","jose@ex.com","123456677","mourinho","password");
+        Coach coach1 = new Coach("José","Mourinho","jose@ex.com","123456677","mourinho",new BCryptPasswordEncoder().encode("password"));
         coachRepoI.saveAndFlush(coach1);
-        Coach coach2 = new Coach("Alex", "Ferguson", "alex@ex.com", "23454","ferguson","password");
+        Coach coach2 = new Coach("Alex", "Ferguson", "alex@ex.com", "23454","ferguson",new BCryptPasswordEncoder().encode("password"));
         coachRepoI.saveAndFlush(coach2);
-        Coach coach3 = new Coach("Marcello","Lippi","marcello@ex.com","123456677","lippi","password");
+        Coach coach3 = new Coach("Marcello","Lippi","marcello@ex.com","123456677","lippi",new BCryptPasswordEncoder().encode("password"));
         coachRepoI.saveAndFlush(coach3);
-        Coach coach4 = new Coach("Arsène","Wenger","arsene@ex.com","123456677","wenger","password");
+        Coach coach4 = new Coach("Arsène","Wenger","arsene@ex.com","123456677","wenger",new BCryptPasswordEncoder().encode("password"));
         coachRepoI.saveAndFlush(coach4);
-        Coach coach5 = new Coach("Yalcin","Karatas","yalcin@ex.com","123456677","karatas","password");
+        Coach coach5 = new Coach("Yalcin","Karatas","yalcin@ex.com","123456677","karatas",new BCryptPasswordEncoder().encode("password"));
         coachRepoI.saveAndFlush(coach5);
 
         AuthGroup authGroup1 = new AuthGroup("yalcin@ex.com", "ROLE_ADMIN");
-        AuthGroup authGroup2 = new AuthGroup("jose@ex.com", "ROLE_USER");
-        AuthGroup authGroup3 = new AuthGroup("alex@ex.com", "ROLE_USER");
-        AuthGroup authGroup4 = new AuthGroup("marcello@ex.com", "ROLE_USER");
-        AuthGroup authGroup5 = new AuthGroup("arsene@ex.com", "ROLE_USER");
+        AuthGroup authGroup6 = new AuthGroup("yalcin@ex.com", "ROLE_COACH");
+        AuthGroup authGroup2 = new AuthGroup("jose@ex.com", "ROLE_COACH");
+        AuthGroup authGroup3 = new AuthGroup("alex@ex.com", "ROLE_COACH");
+        AuthGroup authGroup4 = new AuthGroup("marcello@ex.com", "ROLE_COACH");
+        AuthGroup authGroup5 = new AuthGroup("arsene@ex.com", "ROLE_COACH");
 
         authGroupRepoI.save(authGroup1);
         authGroupRepoI.save(authGroup2);
         authGroupRepoI.save(authGroup3);
         authGroupRepoI.save(authGroup4);
         authGroupRepoI.save(authGroup5);
+        authGroupRepoI.save(authGroup6);
 
 
         Team team1 = new Team( "Kickers", "3 to 5", "NA",coach1);

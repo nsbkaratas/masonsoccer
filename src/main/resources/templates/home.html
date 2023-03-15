@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <!-- Head-->
 <div th:replace="~{fragments/head :: head}" />
 <body class="bg-dark">
@@ -9,50 +9,84 @@
     
 </header>
 <main>
-<!--    <div class="bg-light">-->
-<!--        <section class="py-5 text-center container">-->
-<!--            <div class="row py-lg-5 bg-gradient">-->
-<!--                <div class="col-lg-6 col-md-8 mx-auto ">-->
-<!--                    <h1 class="fw-bold">Lorem ipsum dolor sit amet.</h1>-->
-<!--                    <p class="lead text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa, beatae!</p>-->
-<!--                    <p>-->
-<!--                        <a href="#" class="btn btn-primary my-2">Learn more</a>-->
-<!--                        <p th:text="${team}"></p>-->
-<!--                    </p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </section>-->
-<!--    </div>-->
-    <div class="album py-5 bg-light">
-        <div class="container ">
+    <div class="bg-light">
+        <section class="py-5 text-center container">
+            <div class="row py-lg-5 bg-gradient">
+                <div class="col-lg-6 col-md-8 mx-auto ">
+                    <h3 class="lead text-muted">Welcome To MasonSoccer!<div  sec:authorize="isAuthenticated()" th:text="${coach.firstName}"> </div></h3>
 
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <div class="col">
-                    <div class="card shadow-sm" th:each="team: ${teams}" >
-                        <img class="card-img-top" src="./images/kickers.jpg" alt="">
-                        <div class="card-body">
-                            <p class="card-text" >
-                                <ul>
-                                    <li>Team name:<span th:text="${team.name}"></span> </li>
-                                <li>Age group:<span th:text="${team.ageGroup}"></span> </li>
-                            <li>Team name:<span th:text="${team.id}"></span> </li>
-                            </li>
-                                </ul>
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex justify-content-end">
-                                    <a th:href="@{/teamschedule(id=${team.id})}" class="btn btn-success"
-                                    >View Team Schedule</a
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
-            
-        </div>
+        </section>
     </div>
+
+    <div class=" container-fluid bg-light">
+        <h1>Trainings</h1>
+        <br /><br />
+        <div class="col table-responsive">
+            <table class="table table-bordered table-striped" id="team">
+                <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">StartTime</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Field Name</th>
+                    <th scope="col">Team Name</th>
+                    <!--                <th scope="col">Actions</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="schedule: ${schedules}">
+                    <!--                        <th scope="row" ></th>-->
+                    <td th:text="${schedule.date}"></td>
+                    <td th:text="${schedule.startTime}"></td>
+                    <td th:text="${(schedule.duration)}"></td>
+                    <td th:text="${schedule.fieldName}"></td>
+                    <td th:text="${schedule.team.name}"></td>
+                    <td>
+                        <!--                            <a class="btn btn-info" th:href="@{/training/delete/{id}(id=${training.id})}">Update</a>-->
+                        <!--                            <a class="btn btn-danger ml-2" th:href="@{/training/delete/{id}(id=${schedule.id})}">Delete</a>-->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <a th:href="@{/teams/addteam}" class="btn btn-primary">Add New Training</a>
+            <br /><br />
+        </div>
+
+    </div>
+
+
+<!--    <div class="album py-5 bg-light">-->
+<!--        <div class="container ">-->
+
+<!--            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">-->
+<!--                <div class="col">-->
+<!--                    <div class="card shadow-sm" th:each="team: ${teams}" >-->
+<!--&lt;!&ndash;                        <img class="card-img-top" src="./images/kickers.jpg" alt="">&ndash;&gt;-->
+<!--                        <div class="card-body">-->
+<!--                            <p class="card-text" >-->
+<!--                                <ul>-->
+<!--                                    <li>Team name:<span th:text="${team.name}"></span> </li>-->
+<!--                                <li>Age group:<span th:text="${team.ageGroup}"></span> </li>-->
+<!--                            <li>Team name:<span th:text="${team.id}"></span> </li>-->
+<!--                            </li>-->
+<!--                                </ul>-->
+<!--                            </p>-->
+<!--                            <div class="d-flex justify-content-between align-items-center">-->
+<!--                                <div class="d-flex justify-content-end">-->
+<!--                                    <a th:href="@{/teamschedule(id=${team.id})}" class="btn btn-success"-->
+<!--                                    >View Team Schedule</a-->
+<!--                                    >-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--        </div>-->
+<!--    </div>-->
 
 </main>
 <div class="container text-light">
