@@ -1,16 +1,13 @@
 package com.mycapstone.masonsoccer.service;
 
-import com.mycapstone.masonsoccer.dao.CoachRepoI;
+import com.mycapstone.masonsoccer.data.CoachRepoI;
 import com.mycapstone.masonsoccer.models.Coach;
-import com.mycapstone.masonsoccer.models.Player;
-import com.mycapstone.masonsoccer.models.Team;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j

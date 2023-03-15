@@ -1,13 +1,14 @@
 package com.mycapstone.masonsoccer.service;
 
-import com.mycapstone.masonsoccer.dao.PlayerRepoI;
-import com.mycapstone.masonsoccer.dao.TeamRepoI;
-import com.mycapstone.masonsoccer.dao.TrainingRepoI;
+import com.mycapstone.masonsoccer.data.PlayerRepoI;
+import com.mycapstone.masonsoccer.data.TeamRepoI;
+import com.mycapstone.masonsoccer.data.TrainingRepoI;
 import com.mycapstone.masonsoccer.exception.TeamNotFoundException;
 import com.mycapstone.masonsoccer.models.Coach;
 import com.mycapstone.masonsoccer.models.Player;
 import com.mycapstone.masonsoccer.models.Team;
 import com.mycapstone.masonsoccer.models.Training;
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,7 @@ import java.util.Set;
 
 @Service
 @Slf4j
+@Transactional(rollbackOn = Exception.class)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TeamService {
     @Autowired

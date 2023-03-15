@@ -1,4 +1,4 @@
-package com.mycapstone.masonsoccer.dao;
+package com.mycapstone.masonsoccer.data;
 
 import com.mycapstone.masonsoccer.models.Coach;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface CoachRepoI extends JpaRepository<Coach, Integer> {
-    Optional<Coach> findAllByFirstNameAndLastNameAllIgnoreCase(String firstName, String lastName);
+    Optional<Coach> findByEmail( String email);
 }

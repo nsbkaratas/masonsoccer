@@ -13,13 +13,19 @@
       >
         <div class="login m-5">
           <h1 class="h3 mb-3 text-white fw-normal">User Login</h1>
-          <form id="form" method="post" th:action="@{/loginsuccess}">
+          <form id="form" method="post" th:action="@{/login/processing}">
             <div class="form-group">
               <label class="form-label text-white" for="email"
                 >Email address</label
               >
-              <input class="form-control" id="email" type="text" required />
-              <div class="error"></div>
+              <input
+                class="form-control"
+                id="email"
+                type="email"
+                name="email"
+                required
+              />
+              <div class="error" text-danger></div>
             </div>
 
             <div class="form-group">
@@ -30,23 +36,17 @@
                 class="form-control"
                 id="password"
                 type="password"
+                name="password"
                 required
               />
-              <div class="error"></div>
+              <div class="error text-danger"></div>
             </div>
 
-            <div class="form-group form-check">
-              <input class="form-check-input" id="check" type="checkbox" />
-              <label class="form-check-label text-white" for="check"
-                >Remember me</label
-              >
+            <div >
+
             </div>
-            <button type="submit" class="btn btn-success w-100">SIGN IN</button>
-            <!-- <input
-              class="btn btn-success w-100"
-              type="submit"
-              value="SIGN IN"
-            /> -->
+            <button type="submit" class="btn btn-success mt-3 w-100">SIGN IN</button>
+            <span th:if="${param.error}" th:text="${'Wrong username or password'}" class="error text-warning text-danger"></span>
           </form>
         </div>
       </div>
@@ -56,11 +56,11 @@
       <div th:replace="~{fragments/footer :: footer}" />
     </div>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-      crossorigin="anonymous"
-    ></script>
-    <script src="./javascript/login.js"></script>
+<!--    <script-->
+<!--      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"-->
+<!--      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"-->
+<!--      crossorigin="anonymous"-->
+<!--    ></script>-->
+<!--    <script src="javascript/login.js"></script>-->
   </body>
 </html>

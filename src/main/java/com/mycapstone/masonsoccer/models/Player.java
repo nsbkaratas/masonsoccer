@@ -4,8 +4,7 @@ package com.mycapstone.masonsoccer.models;
  * @author nesibe karatas
  */
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -21,7 +20,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -32,50 +30,57 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Size(max = 50)
-    @NonNull
+    @NotEmpty
+    @Size(min = 2, message = "at least 2 characters required")
     private String firstName;
 
-    @Size(max = 50)
-    @NonNull
+    @NotEmpty
+    @Size(min = 2, message = "at least 2 characters required")
     private String lastName;
+    @Size(max = 10)
+    private String gender;
 
-    @NonNull
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "team_id")
     Team team;
 
+    public Player() {
+    }
+
 //    @ToString.Exclude
 //    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
 //    @JoinColumn(name = "parent_id")
 //    Parent parent;
 
-    public Player( String firstName,  String lastName,  String dateOfBirth, Team team) {
+    public Player( String firstName,  String lastName,  LocalDate dateOfBirth, String gender, Team team) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
+        this.gender=gender;
         this.team = team;
     }
 
-    public Player(String firstName,String lastName,  String dateOfBirth) {
+    public Player(String firstName,String lastName,  LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Player player = (Player) o;
-//        return Objects.equals(id, player.id) && firstName.equals(player.firstName) && lastName.equals(player.lastName) && dateOfBirth.equals(player.dateOfBirth) && Objects.equals(team, player.team) && Objects.equals(parent, player.parent);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id, firstName, lastName, dateOfBirth, team, parent);
-//    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return firstName.equals(player.firstName) && lastName.equals(player.lastName) && dateOfBirth.equals(player.dateOfBirth);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, dateOfBirth);
+    }
 }

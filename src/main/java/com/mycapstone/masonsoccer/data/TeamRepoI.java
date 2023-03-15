@@ -1,4 +1,4 @@
-package com.mycapstone.masonsoccer.dao;
+package com.mycapstone.masonsoccer.data;
 
 import com.mycapstone.masonsoccer.models.Team;
 import org.springframework.data.jpa.repository.JpaRepository;

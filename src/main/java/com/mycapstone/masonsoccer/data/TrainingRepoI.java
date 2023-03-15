@@ -1,4 +1,4 @@
-package com.mycapstone.masonsoccer.dao;
+package com.mycapstone.masonsoccer.data;
 
 import com.mycapstone.masonsoccer.models.Training;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface TrainingRepoI extends JpaRepository<Training, Integer> {
 
-    Optional<Training> findByDateAndDurationAndFieldNameAndStartTimeAllIgnoreCase
-            (String date, String duration, String fieldName, String startTime);
+//    Optional<Training> findByDateAndDurationAndFieldNameAndStartTimeAllIgnoreCase
+//            (String date, String duration, String fieldName, String startTime);
 }

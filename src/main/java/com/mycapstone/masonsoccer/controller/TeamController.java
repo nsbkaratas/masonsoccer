@@ -1,10 +1,9 @@
 package com.mycapstone.masonsoccer.controller;
 
-import com.mycapstone.masonsoccer.dao.CoachRepoI;
-import com.mycapstone.masonsoccer.dao.TeamRepoI;
-import com.mycapstone.masonsoccer.dao.TrainingRepoI;
+import com.mycapstone.masonsoccer.data.CoachRepoI;
+import com.mycapstone.masonsoccer.data.TeamRepoI;
+import com.mycapstone.masonsoccer.data.TrainingRepoI;
 import com.mycapstone.masonsoccer.models.Coach;
-import com.mycapstone.masonsoccer.models.Player;
 import com.mycapstone.masonsoccer.models.Team;
 import com.mycapstone.masonsoccer.models.Training;
 import com.mycapstone.masonsoccer.service.CoachService;
@@ -17,9 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.security.PublicKey;
 import java.util.Arrays;
 import java.util.List;
 
@@ -74,7 +71,7 @@ public class TeamController {
     public String addTeamForm(@ModelAttribute("team") Team team, Model model){
         log.debug("addTeamForm invoked");
         model.addAttribute("team", new Team());
-        List<String> genderTypes=Arrays.asList("Girls", "boys", "NA");
+        List<String> genderTypes=Arrays.asList("Girl", "boy", "NA");
         model.addAttribute("genderTypes", genderTypes);
         List<Coach> listOfCoaches= coachService.findAll();
         model.addAttribute("listOfCoaches", listOfCoaches);

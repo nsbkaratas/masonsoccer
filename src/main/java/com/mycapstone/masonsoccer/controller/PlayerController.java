@@ -1,21 +1,26 @@
 package com.mycapstone.masonsoccer.controller;
 
-import com.mycapstone.masonsoccer.dao.TeamRepoI;
+import com.mycapstone.masonsoccer.data.TeamRepoI;
 import com.mycapstone.masonsoccer.models.Player;
 import com.mycapstone.masonsoccer.models.Team;
 import com.mycapstone.masonsoccer.service.PlayerService;
 import com.mycapstone.masonsoccer.service.TeamService;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * @author nesibe karatas
@@ -55,17 +60,36 @@ public class PlayerController {
     }
 
     @GetMapping("/addplayer")
-    public String addPlayerForm(@ModelAttribute("player") Player player,Model model){
+    public String addPlayerForm(@ModelAttribute("player") Player player, Model model){
         log.warn("addplayer form displayed");
         model.addAttribute("player", new Player());
+        List<String> genderTypes= Arrays.asList("Girl", "boy", "NA");
+        model.addAttribute("genderTypes", genderTypes);
         List<Team> teams = teamService.findAll();
         model.addAttribute("teams", teams);
         return "addplayer";
     }
     @PostMapping("/addplayer/save")
-    public String savePlayer(@ModelAttribute("player") Player player, Model model, Team team){
-        model.addAttribute("player", playerService.saveOrUpdatePlayer(player,team));
-        return "redirect:/players";
+    public String savePlayer(@Valid @ModelAttribute("player") Player player, BindingResult bindingResultPlayer,
+                             Model model,
+                             Team team){
+        if(bindingResultPlayer.hasErrors()){
+            log.warn("errors with bindingresult player" );
+            return "addplayer";
+        }else{
+            LocalDate dob = player.getDateOfBirth();
+            LocalDate now = LocalDate.now();
+            Period period = Period.between(dob, now);
+            int age = period.getYears();
+//            if(age==3||age==5 && player.getGender()=="NA"){
+//
+//            }
+            model.addAttribute("player", playerService.saveOrUpdatePlayer(player,team));
+            model.addAttribute("message", "Successfully added player");
+            return "redirect:/players";
+        }
+
+
     }
 
 }

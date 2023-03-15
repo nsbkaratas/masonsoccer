@@ -14,16 +14,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@RequestMapping("/login")
+@RequestMapping
 public class LoginController {
-    @GetMapping()
+    @GetMapping("/login")
     public String login(){
         log.debug("I am in login controller method");
         return "login";
     }
-    @PostMapping("loginsuccess")
-    public String loginSuccess(){
-        log.debug("I am in loginsuccess controller method");
-        return "redirect:/";
+
+    @GetMapping("/403")
+    public String access(){
+        log.debug("I am in login controller method");
+        return "403";
     }
+    @GetMapping("/error")
+    public String erroraccess(){
+        log.debug("I am in login controller method");
+        return "error";
+    }
+//    @PostMapping("processing")
+//    public String loginSuccess(){
+//        log.debug("I am in loginsuccess controller method");
+//        return "redirect:/";
+//    }
 }

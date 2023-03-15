@@ -29,7 +29,9 @@
                 <td th:text="${team.name}"></td>
                 <td th:text="${team.gender}"></td>
                 <td th:text="${team.ageGroup}"></td>
-<!--                <td th:text="${}+' '+${coach.lastName"}></td>-->
+                <td  th:text="${team.coach.firstName}+' '+${team.coach.lastName}"></td>
+
+
 <!--                  <h1 class="display-4 fw-bolder text-dark mb-2"-->
 <!--                      th:text="'Team ' + ${team.name} + ' Training Schedule'"></h1>-->
 

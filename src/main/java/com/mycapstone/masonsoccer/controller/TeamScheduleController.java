@@ -1,6 +1,6 @@
 package com.mycapstone.masonsoccer.controller;
 
-import com.mycapstone.masonsoccer.dao.TrainingRepoI;
+import com.mycapstone.masonsoccer.data.TrainingRepoI;
 import com.mycapstone.masonsoccer.models.Team;
 import com.mycapstone.masonsoccer.models.Training;
 import com.mycapstone.masonsoccer.service.TeamService;
@@ -12,9 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Period;
 
 /**
  * @author nesibe karatas

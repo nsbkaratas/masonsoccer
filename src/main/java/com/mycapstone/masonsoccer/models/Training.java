@@ -37,16 +37,15 @@ public class Training {
 
     @NonNull
     @Column(name = "date", nullable = false)
-    private String date;
+    private LocalDate date;
 
     @NonNull
     @Column(name = "start_time", nullable = false)
-    private String startTime;
+    private LocalTime startTime;
 
     @NonNull
-    @Column(name = "duration", nullable = false, length = 50)
+    @Column(name = "end_time", nullable = false, length = 50)
     private String duration;
-
     @Size(max = 50)
     @NonNull
     @Column(name = "field_name", nullable = false, length = 50)
@@ -57,14 +56,14 @@ public class Training {
     @JoinColumn(name="team_id")
     Team team;
 
-    public Training(@NonNull String date, @NonNull String startTime, @NonNull String duration, @NonNull String fieldName) {
+    public Training(@NonNull LocalDate date, @NonNull LocalTime startTime, @NonNull String duration, @NonNull String fieldName) {
         this.date = date;
         this.startTime = startTime;
         this.duration = duration;
         this.fieldName = fieldName;
     }
 
-    public Training(@NonNull String date, @NonNull String startTime, @NonNull String duration, @NonNull String fieldName, Team team) {
+    public Training(@NonNull LocalDate date, @NonNull LocalTime startTime, @NonNull String duration, @NonNull String fieldName, Team team) {
         this.date = date;
         this.startTime = startTime;
         this.duration = duration;

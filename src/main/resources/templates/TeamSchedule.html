@@ -19,7 +19,7 @@
                     <thead>
                     <tr>
                         <th scope="col">Date</th>
-                        <th scope="col">Time</th>
+                        <th scope="col">Start Time</th>
                         <th scope="col">Duration</th>
                         <th scope="col">Field Name</th>
                     </tr>
@@ -29,7 +29,7 @@
 <!--                        <th scope="row" ></th>-->
                         <td th:text="${schedule.date}"></td>
                         <td th:text="${schedule.startTime}"></td>
-                        <td th:text="${schedule.duration}"></td>
+                        <td th:text="${(schedule.duration)}"></td>
                         <td th:text="${schedule.fieldName}"></td>
 
                         <td>

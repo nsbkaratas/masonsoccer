@@ -19,7 +19,8 @@
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Date of Birth</th>
-<!--                <th scope="col">Team</th>-->
+                <th scope="col">Gender</th>
+                <th scope="col">Team</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -29,6 +30,8 @@
                 <td th:text="${player.firstName}" ></td>
                 <td th:text="${player.lastName}" ></td>
                 <td th:text="${player.dateOfBirth}" ></td>
+                <td th:text="${player.gender}" ></td>
+                <td  th:text="${player.team.name}"></td>
                 <td>
                   <a class="btn btn-info" th:href="@{/players/addplayer}">Update</a>
                   <a class="btn btn-danger ml-2" th:href="@{/players/deleteplayer/{id}(id=${player.id})}">Delete</a>

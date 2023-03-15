@@ -1,7 +1,5 @@
 package com.mycapstone.masonsoccer.controller;
 
-import com.mycapstone.masonsoccer.dao.CoachRepoI;
-import com.mycapstone.masonsoccer.dao.TeamRepoI;
 import com.mycapstone.masonsoccer.service.TeamService;
 import com.mycapstone.masonsoccer.service.TrainingService;
 import lombok.AccessLevel;

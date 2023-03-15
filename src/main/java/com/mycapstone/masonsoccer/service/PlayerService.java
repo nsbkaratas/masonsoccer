@@ -1,13 +1,15 @@
 package com.mycapstone.masonsoccer.service;
 
-import com.mycapstone.masonsoccer.dao.PlayerRepoI;
-import com.mycapstone.masonsoccer.dao.TeamRepoI;
+import com.mycapstone.masonsoccer.data.PlayerRepoI;
+import com.mycapstone.masonsoccer.data.TeamRepoI;
 import com.mycapstone.masonsoccer.models.Player;
 import com.mycapstone.masonsoccer.models.Team;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,18 +40,25 @@ public class PlayerService {
     }
 
     public Player saveOrUpdatePlayer(Player player, Team team) {
+
         if(playerRepoI.findByFirstNameAndLastName(player.getFirstName(),player.getLastName()).isPresent()){
             log.warn("player "+player.getFirstName()+" exist");
             String teamName= player.getTeam().getName();
             Player selectedPlayer=playerRepoI.findByFirstNameAndLastName(player.getFirstName(),player.getLastName()).get();
-//            Optional<Team> optionalTeam = teamRepoI.findByName(teamName);
             selectedPlayer.setFirstName(player.getFirstName());
             selectedPlayer.setLastName(player.getLastName());
-            selectedPlayer.setDateOfBirth(player.getDateOfBirth());
-            selectedPlayer.setTeam(team);
+            LocalDate dob = player.getDateOfBirth();
+            selectedPlayer.setDateOfBirth(dob);
+            LocalDate now = LocalDate.now();
+            Period period = Period.between(dob, now);
+            int age = period.getYears();
+//            if(age==3||age==5 && player.getGender()=="NA"){
+//                selectedPlayer.setTeam();
+//            }
+
             return playerRepoI.save(player);
         }else{
-            log.warn("player name"+ player.getFirstName()+" does not exist");
+            log.warn("player name "+ player.getFirstName()+" does not exist");
             player.setTeam(team);
             return playerRepoI.save(player);
         }

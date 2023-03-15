@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
   <!-- Head-->
   <div th:replace="~{fragments/head :: head}" />
+
   <body>
     <header>
       <!-- Responsive navbar-->
@@ -17,7 +18,7 @@
             >
               <div class="card-body p-4 p-md-5">
                 <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Add New Player</h3>
-                <form th:action="@{/players/addplayer/save}" th:object="${player}" method="post">
+                <form id="form" th:action="@{/players/addplayer/save}" th:object="${player}" method="post">
                   <div class="row">
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
@@ -40,10 +41,12 @@
                           th:value="${firstName}"
                           th:field="*{firstName}"
                           type="text"
+                          name="firstName"
                           id="firstName"
                           class="form-control form-control-lg"
+                          required
                         />
-                        <div class="error"></div>
+                        <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error text-danger" ></div>
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
@@ -53,10 +56,12 @@
                                 th:value="${lastName}"
                                 th:field="*{lastName}"
                                 type="text"
+                                name="lastName"
                                 id="lastName"
                                 class="form-control form-control-lg"
+                                required
                         />
-                        <div class="error"></div>
+                        <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error text-danger" ></p>
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
@@ -68,9 +73,10 @@
                           th:value="${dateOfBirth}"
                           name="dateOfBirth"
                           th:field="*{dateOfBirth}"
-                          type="text"
+                          type="date"
                           id="dateOfBirth"
                           class="form-control form-control-lg"
+                          required
                         />
                         <div class="error"></div>
                       </div>
@@ -78,6 +84,22 @@
                   </div>
 
                   <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <label class="form-label">Gender</label>
+                        <select
+                                th:field="*{gender}"
+                                class="form-control form-control-lg">
+                          <option
+                                  th:each="gender:${genderTypes}"
+                                  th:value="${gender}"
+                                  th:text="${gender}"
+                          />
+                        </select>
+
+                        <div class="error"></div>
+                      </div>
+                    </div>
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
                         <label class="form-label" for="teamId">Assign Team to player</label>
@@ -97,24 +119,7 @@
                       </div>
                     </div>
                   </div>
-<!--                    <div class="col-md-6 mb-4">-->
-<!--                      <div class="form-outline">-->
-<!--                        <label class="form-label">Select Coach</label>-->
-<!--                        <select-->
-<!--                          class="form-control form-control-lg"-->
-<!--                          name="team"-->
-<!--                        >-->
-<!--                        <option>José Mourinho</option>-->
-<!--                        <option>Alex Ferguson</option>-->
-<!--                        <option>Marcello Lippi</option>-->
-<!--                        <option>Arsène Wenger</option>-->
-<!--                        </select>-->
-
-<!--                        <div class="error"></div>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
-
+                  <div class="error" hidden ></div>
                   <div class="row">
                     <div class="mt-4 pt-2">
                       <input
