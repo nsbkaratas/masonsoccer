@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+  <!-- Head-->
+  <div th:replace="fragments/head :: head" />
+  <body>
+    <header>
+      <!-- Responsive navbar-->
+      <div th:replace="fragments/nav :: nav" />
+    </header>
+    <main id="main-content">
+      <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+          <div class="col-12 col-lg-9 col-xl-7">
+            <div
+              class="card shadow-2-strong card-registration"
+              style="border-radius: 15px; background-color: #e8e8e8"
+            >
+              <div class="card-body p-4 p-md-5">
+                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Add New Team</h3>
+                <form th:action="@{/teams/addteam/save}" th:object="${team}" method="post">
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <label class="form-label" for="name">Name</label>
+                        <input
+                          th:value="${name}"
+                          th:field="*{name}"
+                          type="text"
+                          id="name"
+                          class="form-control form-control-lg"
+                        />
+
+                        <div class="error"></div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <label class="form-label" for="ageGroup"
+                          >AgeGroup</label
+                        >
+                        <input
+                          th:value="${ageGroup}"
+                          name="ageGroup"
+                          th:field="*{ageGroup}"
+                          type="text"
+                          id="ageGroup"
+                          class="form-control form-control-lg"
+                        />
+                        <div class="error"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <label class="form-label">Gender</label>
+                        <select
+                          th:field="*{gender}"
+                                class="form-control form-control-lg">
+                          <option
+                            th:each="gender:${genderTypes}"
+                            th:value="${gender}"
+                            th:text="${gender}"
+                          />
+                        </select>
+
+                        <div class="error"></div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <label class="form-label" for="coachId">Assign a Coach to Team</label>
+                        <select
+                                th:field="*{coach}"
+                                id="coachId"
+                                class="form-control form-control-lg"
+                                required
+                        >
+                          <option
+                                  th:each="coach:${listOfCoaches}"
+                                  th:value="${coach.id}"
+                                  th:text="${coach.firstName}+' '+${coach.lastName}"
+                          />
+                        </select>
+
+                        <div class="error"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+
+                  <div class="row">
+                    <div class="mt-4 pt-2">
+                      <input
+                        class="btn btn-success btn-lg"
+                        type="submit"
+                        value="Submit"
+                      />
+                    </div>
+                    <!--                  <a>Back to list</a>-->
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="container text-light">
+      <!-- Footer-->
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
+
+
+
