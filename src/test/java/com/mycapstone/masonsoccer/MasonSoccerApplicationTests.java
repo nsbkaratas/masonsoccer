@@ -29,13 +29,13 @@ class MasonSoccerApplicationTests {
 		this.playerRepoI = playerRepoI;
 	}
 
-	Coach coach1 = new Coach("José","Mourinho","jm@ex.com","123456677","mourinho","password1");
+	Coach coach1 = new Coach("José","Mourinho","jose@ex.com","123456677","mourinho","password1");
 	Team team1 = new Team( "Kickers", "3 to 5", "NA");
 	Player player1 = new Player("Cristiano", "Ronaldo", LocalDate.of(2018,2,05),"boy", team1);
 
 	@Test
 	void contextLoads() {
-		assertThat(coachRepoI.findByEmail("jm@ex.com").get()).isEqualTo(coach1);
+		assertThat(coachRepoI.findByEmail("jose@ex.com").get()).isEqualTo(coach1);
 	}
 
 	@Test

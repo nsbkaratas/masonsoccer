@@ -41,19 +41,17 @@ public class PlayerService {
 
 
     public Player saveOrUpdatePlayer(Player player, Team team) {
-
         if(playerRepoI.findByFirstNameAndLastName(player.getFirstName(),player.getLastName()).isPresent()){
             log.warn("player "+player.getFirstName()+" exist");
             String teamName= player.getTeam().getName();
             Player selectedPlayer=playerRepoI.findByFirstNameAndLastName(player.getFirstName(),player.getLastName()).get();
             selectedPlayer.setFirstName(player.getFirstName());
             selectedPlayer.setLastName(player.getLastName());
-//
-
+            selectedPlayer.setDateOfBirth(player.getDateOfBirth());
+            selectedPlayer.setTeam(team);
             return playerRepoI.save(player);
         }else{
             log.warn("player name "+ player.getFirstName()+" does not exist");
-            player.setTeam(team);
             return playerRepoI.save(player);
         }
     }

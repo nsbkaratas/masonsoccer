@@ -33,9 +33,9 @@
                 <td th:text="${player.gender}" ></td>
                 <td  th:text="${player.team.name}"></td>
                 <td>
-                  <a class="btn btn-info" th:href="@{/players/playerform}">Update</a>
+<!--                  <a sec:authorize="hasRole('ADMIN')" class="btn btn-info" th:href="@{/players/playerform}">Update</a>-->
 <!--                  <a class="btn btn-info" th:href="@{/players/update/{id}(id=${player.id})}">UpdateR</a>-->
-                  <a class="btn btn-danger ml-2" th:href="@{/players/deleteplayer/{id}(id=${player.id})}">Delete</a>
+                  <a sec:authorize="hasRole('ADMIN')" class="btn btn-danger ml-2" th:href="@{/players/deleteplayer/{id}(id=${player.id})}">Delete</a>
                 </td>
               </tr>
             </tbody>

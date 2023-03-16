@@ -34,8 +34,8 @@ import java.util.Optional;
 public class TeamController {
     @Autowired
     CoachService coachService;
-    @Autowired
-    private final CoachRepoI coachRepoI;
+
+    CoachRepoI coachRepoI;
     TeamRepoI teamRepoI;
 
     TeamService teamService;
@@ -44,14 +44,13 @@ public class TeamController {
     TrainingService trainingService;
     TrainingRepoI trainingRepoI;
     @Autowired
-    public TeamController(TeamService teamService, TrainingService trainingService, TrainingRepoI trainingRepoI,
-                          TeamRepoI teamRepoI,
-                          CoachRepoI coachRepoI) {
+    public TeamController(CoachService coachService, CoachRepoI coachRepoI, TeamRepoI teamRepoI, TeamService teamService, TrainingService trainingService, TrainingRepoI trainingRepoI) {
+        this.coachService = coachService;
+        this.coachRepoI = coachRepoI;
+        this.teamRepoI = teamRepoI;
         this.teamService = teamService;
         this.trainingService = trainingService;
         this.trainingRepoI = trainingRepoI;
-        this.teamRepoI = teamRepoI;
-        this.coachRepoI = coachRepoI;
     }
 
     @GetMapping()
@@ -87,11 +86,6 @@ public class TeamController {
         return "addteam";
     }
 
-//    @PostMapping("/addplayer/save")
-//    public String savePlayer(@ModelAttribute("coach") Coach coach, Model model, Team team){
-//        model.addAttribute("coach", coachService.saveOrUpdateCoach(coach));
-//        return "redirect:/players";
-//    }
 
     @PostMapping("/addteam/save")
     public String saveTeam(@ModelAttribute("team") Team team, Coach coach,Model model){
@@ -99,12 +93,6 @@ public class TeamController {
         return "redirect:/teams";
     }
 
-//    @GetMapping("/deleteTeam/{id}")
-//    public String deleteTeam(@PathVariable(name="id") Integer id) throws Exception{
-//        log.debug("Value of the id "+String.valueOf(id));
-//        teamService.deleteTeam(id);
-//        return "redirect:/teams";
-//    }
     @GetMapping("/deleteTeam/{id}")
     public String deleteTeam(@PathVariable(name="id") Integer id, Model model) throws Exception{
         log.debug("Value of the id "+String.valueOf(id));

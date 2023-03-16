@@ -105,18 +105,25 @@ public class PlayerController {
 //    save player
 
     @PostMapping("/addplayer/save")
-    public String savePlayer(@Valid @ModelAttribute("player") Player player, BindingResult bindingResultPlayer,
-                             Model model,
-                             Team team){
-        if(bindingResultPlayer.hasErrors()){
-            log.warn("errors with bindingresult player" );
-            return "addplayer";
-        }else {
-            model.addAttribute("player", playerService.saveOrUpdatePlayer(player, team));
-            model.addAttribute("message", "Successfully added player");
-            return "redirect:/players";
-        }
+    public String savePlayer(@ModelAttribute("player") Player player, Model model, Team team){
+//        model.addAttribute("player", playerService.saveOrUpdatePlayer(player));
+        model.addAttribute("player", playerService.saveOrUpdatePlayer(player,team));
+        return "redirect:/players";
     }
+
+//    @PostMapping("/addplayer/save")
+//    public String savePlayer(@Valid @ModelAttribute("player") Player player, BindingResult bindingResultPlayer,
+//                             Model model,
+//                             Team team){
+//        if(bindingResultPlayer.hasErrors()){
+//            log.warn("errors with bindingresult player" );
+//            return "addplayer";
+//        }else {
+//            model.addAttribute("player", playerService.saveOrUpdatePlayer(player, team));
+//            model.addAttribute("message", "Successfully added player");
+//            return "redirect:/players";
+//        }
+//    }
 
 //    @GetMapping("/showUpdateForm")
 //    public ModelAndView showUpdateForm(@RequestParam int id) {
