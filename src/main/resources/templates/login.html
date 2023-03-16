@@ -45,6 +45,7 @@
             </div>
             <button type="submit" class="btn btn-success mt-3 w-100">SIGN IN</button>
             <span th:if="${param.error}" th:text="${'Wrong username or password'}" class="error text-warning text-danger"></span>
+            <p class="text-white">New user? <a th:href="@{register}">Register here</a></p>
           </form>
         </div>
       </div>
