@@ -43,8 +43,8 @@ public class MySecurityConfig {
 
         http.csrf().disable()
                 .authorizeHttpRequests((requests)->requests
-                    .requestMatchers("/","/index","/css/**", "/javascript/**").permitAll()
-                        .requestMatchers("/teams","/teams/teamsplayers/**","/players/**","/teamschedule").hasAuthority("ROLE_COACH")
+                    .requestMatchers("/","/index","/css/**","/register", "/javascript/**").permitAll()
+                        .requestMatchers("/teams","/teams/teamsplayers/**","/players","/teamschedule").hasAuthority("ROLE_COACH")
                         .requestMatchers("/teams/**","/players/**","/teamschedule/**").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 )

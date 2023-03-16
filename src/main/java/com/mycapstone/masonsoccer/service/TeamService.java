@@ -57,7 +57,7 @@ public class TeamService {
 //    }
     public Team findTeamById(Integer id){
         log.warn("findTeambyID method invoked");
-    return teamRepoI.findById(id).orElseThrow(()->new TeamNotFoundException(id));
+    return teamRepoI.findById(id).get();
 }
     public Optional<Team> findByName(String name){
         log.warn("findbyname invoked");

@@ -48,14 +48,7 @@ public class PlayerService {
             Player selectedPlayer=playerRepoI.findByFirstNameAndLastName(player.getFirstName(),player.getLastName()).get();
             selectedPlayer.setFirstName(player.getFirstName());
             selectedPlayer.setLastName(player.getLastName());
-//            LocalDate dob = player.getDateOfBirth();
-//            selectedPlayer.setDateOfBirth(dob);
-//            LocalDate now = LocalDate.now();
-//            Period period = Period.between(dob, now);
-//            int age = period.getYears();
-////            if(age==3||age==5 && player.getGender()=="NA"){
-////                selectedPlayer.setTeam();
-////            }
+//
 
             return playerRepoI.save(player);
         }else{

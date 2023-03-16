@@ -45,8 +45,8 @@
               <td th:text="${team.ageGroup}"></td>
               <td  th:text="${team.coach.firstName}+' '+${team.coach.lastName}"></td>
               <td>
-                <a class="btn btn-info"  th:href="@{/teams/team}">Update Team</a>
-                <a class="btn btn-info"  th:href="@{/teams/teamsplayers(id=${team.id})}" >View Players</a>
+                <a class="btn btn-info"  th:href="@{/teams/addteam}">Update Team</a>
+<!--                <a class="btn btn-info"  th:href="@{/teams/teamsplayers(id=${team.id})}" >View Players</a>-->
                 <a class="btn btn-danger ml-2" th:href="@{/teams/deleteTeam/{id}(id=${team.id})}">Delete</a>
               </td>
             </tr>

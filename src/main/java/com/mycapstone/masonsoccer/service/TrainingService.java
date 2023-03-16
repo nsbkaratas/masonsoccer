@@ -8,8 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author nesibe karatas
@@ -69,6 +71,6 @@ public class TrainingService {
     }
 
     public List<Training> findAll() {
-        return trainingRepoI.findAll();
+        return trainingRepoI.findAll().stream().filter(training -> training.getDate().isAfter(LocalDate.now())).collect(Collectors.toList());
     }
 }
