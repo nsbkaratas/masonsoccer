@@ -13,7 +13,7 @@
         <section class="py-5 text-center container">
             <div class="row py-lg-5 bg-gradient">
                 <div class="col-lg-6 col-md-8 mx-auto ">
-                    <h3 class="lead text-muted">Welcome To MasonSoccer!<div  sec:authorize="isAuthenticated()" th:text="${coach.firstName}"> </div></h3>
+                    <h1 class="lead text-bold">Welcome To MasonSoccer!<div  sec:authorize="isAuthenticated()" th:text="${coach.firstName}"> </div></h1>
 
                 </div>
             </div>
@@ -50,7 +50,7 @@
                 </tr>
                 </tbody>
             </table>
-            <a th:href="@{/teams/addteam}" class="btn btn-primary">Add New Training</a>
+<!--            <a th:href="@{/addtraining}" class="btn btn-primary">Add New Training</a>-->
             <br /><br />
         </div>
 
